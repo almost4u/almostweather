@@ -25,6 +25,8 @@
         <activity
             android:name="com.almostweather.app.activity.WeatherActivity">
         </activity>
+        <service android:name="com.almostweather.app.service.AutoUpdateService"></service>
+        <receiver android:name="com.almostweather.app.receiver.AutoUpdateReceiver"></receiver>
     </application>
 
 </manifest>
