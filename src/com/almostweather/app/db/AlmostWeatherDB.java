@@ -98,7 +98,7 @@ public class AlmostWeatherDB {
 	public void saveCounty(County c){
 		if(c!=null){
 			ContentValues v = new ContentValues();
-			v.put("county_name", c.getCountyCode());
+			v.put("county_name", c.getCountyName());
 			v.put("county_code", c.getCountyCode());
 			v.put("city_id", c.getCityId());
 			db.insert("County", null, v);
@@ -106,7 +106,7 @@ public class AlmostWeatherDB {
 		}
 	}
 	//从数据库读取某城市下所有县的信息
-	public List<County> loadCounty(int cityId){
+	public List<County> loadCounties(int cityId){
 		List<County> list = new ArrayList<County>();
 		Cursor cursor = db.query("County", null, "city_id = ?", new String[]{String.valueOf(cityId)}, null, null, null);
 		if(cursor.moveToNext()){
@@ -116,6 +116,7 @@ public class AlmostWeatherDB {
 				c.setCountyName(cursor.getString(cursor.getColumnIndex("county_name")));
 				c.setCountyCode(cursor.getString(cursor.getColumnIndex("county_code")));
 				c.setCityId(cityId);
+				list.add(c);
 			}while(cursor.moveToNext());
 		}
 		if(cursor!=null){
